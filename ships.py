@@ -18,9 +18,12 @@ class Ship():
         self.screen = earth.screen
         self.screen_rect = earth.screen.get_rect()
 
-        self.image = pygame.image.load('images/ship.bmp')
+        #self.image = pygame.image.load('images/ship.bmp')
+        self.master_image = pygame.image.load('images/ship.bmp')
+        self.image = self.master_image.copy()
         self.rect = self.image.get_rect()
         self.rect.center = self.location
+        
         print(self.screen)
         print(self.screen_rect)
         print(self.rect)
@@ -31,6 +34,6 @@ class Ship():
     def update_position(self):
         self.orbital_angle -= self.settings.ship_angular_speed
         self.rect.center = [a_i - b_i for a_i, b_i in zip(self.earth.rect.center, [self.offset*math.sin(self.orbital_angle), self.offset*math.cos(self.orbital_angle)])]
-        #self.image = pygame.transform.rotate(self.image, self.settings.ship_angular_speed)
+        self.image = pygame.transform.rotate(self.master_image, self.orbital_angle * 360 / (2 * math.pi))
 
 #image = pygame.transform.rotate(image, rotation_angle)
