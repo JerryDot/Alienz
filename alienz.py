@@ -5,6 +5,7 @@ from settings import Settings
 from earth import Earth
 from utilities import update_fps, log_message
 from logger import Logger
+from encounter import Encounter
 
 class Alienz:
     # This is the overall class to manage game assets and behaviour
@@ -18,6 +19,7 @@ class Alienz:
         pygame.display.set_caption("Alienz")
         self.earth = Earth(self)
         self.logger = Logger(self)
+        self.encounter = Encounter(self)
 
 
     def run_game(self):
@@ -26,6 +28,7 @@ class Alienz:
             self._check_events()
             self._update_screen()
             self._update_ships()
+            self._update_enemies()
             self.clock.tick(60)
 
     def _check_events(self):
@@ -48,6 +51,8 @@ class Alienz:
             factory.blitme()
         for ship in self.earth.ships:
             ship.blitme()
+        for enemy in self.encounter.enemies:
+            enemy.blitme()
         
         self.screen.blit(update_fps(self), (10,0))
         self.screen.blit(log_message(self, self.logger.log_message, self.logger.color), (800,0))
@@ -57,6 +62,10 @@ class Alienz:
     def _update_ships(self):
         for ship in self.earth.ships:
             ship.update_position()
+
+    def _update_enemies(self):
+        for enemy in self.encounter.enemies:
+            enemy.update_position()
 
 
 if __name__ == '__main__':

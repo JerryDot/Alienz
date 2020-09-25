@@ -11,3 +11,8 @@ class ShipSettings:
 
     def __init__(self):
         self.ship_angular_speed = 0.005
+
+class EnemyShipSettings:
+
+    def __init__(self):
+        self.ship_angular_speed = 0.005
