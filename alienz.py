@@ -20,6 +20,7 @@ class Alienz:
         self.earth = Earth(self)
         self.logger = Logger(self)
         self.encounter = Encounter(self)
+        self.is_encounter_active = False
 
 
     def run_game(self):
@@ -51,6 +52,8 @@ class Alienz:
             factory.blitme()
         for ship in self.earth.ships:
             ship.blitme()
+            for bullet in ship.bullets:
+                bullet.blitme()
         for enemy in self.encounter.enemies:
             enemy.blitme()
         
@@ -62,6 +65,8 @@ class Alienz:
     def _update_ships(self):
         for ship in self.earth.ships:
             ship.update_position()
+            for bullet in ship.bullets:
+                bullet.update_position()
 
     def _update_enemies(self):
         for enemy in self.encounter.enemies:
