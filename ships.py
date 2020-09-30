@@ -4,8 +4,11 @@ import math
 from settings import ShipSettings
 from utilities import log_message
 
-class Ship():
+class Ship(pygame.sprite.Sprite):
     def __init__(self, earth):
+
+        pygame.sprite.Sprite.__init__(self)
+        
         print("ship created")
         earth.a_game.logger.update_log("ship created")
         self.offset = random.uniform(0.6,1)*200
@@ -23,7 +26,7 @@ class Ship():
         self.image = self.master_image.copy()
         self.rect = self.image.get_rect()
         self.rect.center = self.location
-        
+
         print(self.screen)
         print(self.screen_rect)
         print(self.rect)

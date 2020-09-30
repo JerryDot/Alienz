@@ -3,8 +3,11 @@ import random
 import math
 from settings import EnemyShipSettings
 
-class EnemyShip():
+class EnemyShip(pygame.sprite.Sprite):
     def __init__(self, encounter):
+
+        pygame.sprite.Sprite.__init__(self)
+        
         print("enemy created")
         encounter.a_game.logger.update_log("enemy created")
         self.offset = random.uniform(-100,100)

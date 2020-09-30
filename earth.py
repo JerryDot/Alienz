@@ -31,8 +31,8 @@ class Earth:
         self.image = pygame.image.load('images/earth.bmp')
         self.rect = self.image.get_rect()
         self.rect.center = self.screen_rect.center
-        self.factories = []
-        self.ships = []
+        self.factories = pygame.sprite.Group()
+        self.ships = pygame.sprite.Group()
         print(self.screen)
         print(self.screen_rect)
         print(self.rect)
@@ -42,7 +42,7 @@ class Earth:
 
     def create_factory(self):
         if len(possible_factory_locations) > 0:
-            self.factories.append(Factory(self))
+            self.factories.add(Factory(self))
         else:
             self.a_game.logger.update_log("Factory limit reached", 'red')
 
@@ -50,4 +50,4 @@ class Earth:
         self.possible_factory_locations.remove(factory_location)
     
     def create_ship(self):
-        self.ships.append(Ship(self))
+        self.ships.add(Ship(self))

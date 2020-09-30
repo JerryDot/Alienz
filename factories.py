@@ -3,8 +3,11 @@ import random
 from utilities import log_message
 
 
-class Factory():
+class Factory(pygame.sprite.Sprite):
     def __init__(self, earth):
+
+        pygame.sprite.Sprite.__init__(self)
+        
         print("factory created")
         earth.a_game.logger.update_log("factory created")
         self.location = random.choice(earth.possible_factory_locations)

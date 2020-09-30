@@ -54,7 +54,7 @@ class Alienz:
         for enemy in self.encounter.enemies:
             enemy.blitme()
         
-        self.screen.blit(update_fps(self), (10,0))
+        self.screen.blit(update_fps(self), (3,0))
         self.screen.blit(log_message(self, self.logger.log_message, self.logger.color), (800,0))
 
         pygame.display.flip()
