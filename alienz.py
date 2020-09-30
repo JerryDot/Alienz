@@ -15,7 +15,7 @@ class Alienz:
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont("Arial", 18)
         self.settings = Settings()
-        self.screen=pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height))
+        self.screen = pygame.display.set_mode( (self.settings.screen_width, self.settings.screen_height) )
         pygame.display.set_caption("Alienz")
         self.earth = Earth(self)
         self.logger = Logger(self)
