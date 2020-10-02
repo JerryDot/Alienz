@@ -8,7 +8,6 @@ class Factory(pygame.sprite.Sprite):
 
         pygame.sprite.Sprite.__init__(self)
         
-        print("factory created")
         earth.a_game.logger.update_log("factory created")
         self.location = random.choice(earth.possible_factory_locations)
         earth.remove_factory_location(self.location)
