@@ -53,8 +53,8 @@ class Bullet(pygame.sprite.Sprite):
 
     def update_position(self):
         self.target_angle = return_angle(self, self.target)
-        self.rect.x += 5*math.cos(math.radians(self.target_angle))
-        self.rect.y += 5*math.sin(math.radians(self.target_angle))
+        self.rect.x += 2*math.cos(math.radians(self.target_angle))
+        self.rect.y += 2*math.sin(math.radians(self.target_angle))
         self.image = pygame.transform.rotate(self.master_image, self.target_angle)
     
     def destruct(self):

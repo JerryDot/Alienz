@@ -17,7 +17,6 @@ class EnemyShip(pygame.sprite.Sprite):
         self.targeting_bullets = pygame.sprite.Group()
 
         self.location = [0, 300 + self.offset]
-        print(self.location)
         self.screen = encounter.a_game.screen
         self.screen_rect = encounter.a_game.screen.get_rect()
 
@@ -30,9 +29,6 @@ class EnemyShip(pygame.sprite.Sprite):
         else:
             self.direction = -1
         
-        print(self.screen)
-        print(self.screen_rect)
-        print(self.rect)
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)

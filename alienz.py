@@ -36,6 +36,7 @@ class Alienz:
             self._update_enemies()
             self._update_bullets()
             self._check_collisions()
+            self._update_encounter_status()
             self.clock.tick(60)
 
     def _check_events(self):
@@ -85,6 +86,14 @@ class Alienz:
         for bullet in collisions:
             collisions[bullet][0].receive_damage(bullet.damage)
             bullet.kill()
+    
+    def _update_encounter_status(self):
+        self.encounter.check_encounter()
+        #print(self.is_encounter_active)
+        if self.is_encounter_active == False:
+            self.encounter = Encounter(self)
+            #print(self.is_encounter_active)
+
 
 
 

@@ -7,6 +7,7 @@ class Encounter:
         self.a_game = a_game
         self.enemies = pygame.sprite.Group()
         self.a_game.is_encounter_active = True
+        #print(self.a_game.is_encounter_active)
 
         if encounter_type == 'hostile':
             for i in range(3):
@@ -15,8 +16,9 @@ class Encounter:
                 self.a_game.enemies.add(new_enemy)
 
     def check_encounter(self):
-        if not self.enemies.has():
+        if len(self.enemies) == 0:
             self.a_game.is_encounter_active = False
+        
 
     
             
