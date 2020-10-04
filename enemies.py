@@ -14,6 +14,7 @@ class EnemyShip(pygame.sprite.Sprite):
         self.orbital_angle = 0
         self.settings = EnemyShipSettings()
         self.encounter = encounter
+        self.hp = 100
 
         self.location = [0, 300 + self.offset]
         print(self.location)
@@ -47,5 +48,17 @@ class EnemyShip(pygame.sprite.Sprite):
         #self.orbital_angle -= self.settings.ship_angular_speed
         #self.rect.center = [a_i - b_i for a_i, b_i in zip(self.encounter.a_game.earth.rect.center, [self.offset*math.sin(self.orbital_angle), self.offset*math.cos(self.orbital_angle)])]
         #self.image = pygame.transform.rotate(self.master_image, self.orbital_angle * 360 / (2 * math.pi))
+
+    def receive_damage(self, amount):
+        self.hp -= amount
+        if self.hp < 0:
+            self.delete_ship()
+    
+    def delete_ship(self):
+        self.kill()
+        del self
+
+        
+        
 
 #image = pygame.transform.rotate(image, rotation_angle)

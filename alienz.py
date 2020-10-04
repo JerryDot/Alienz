@@ -81,7 +81,12 @@ class Alienz:
             bullet.update_position()
 
     def _check_collisions(self):
-        collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, True, True)
+        collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, False, False)
+        for bullet in collisions:
+            collisions[bullet][0].receive_damage(bullet.damage)
+            bullet.kill()
+
+
 
 
 if __name__ == '__main__':

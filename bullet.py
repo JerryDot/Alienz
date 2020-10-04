@@ -4,10 +4,11 @@ import math
 
 class Bullet(pygame.sprite.Sprite):
 
-    def __init__(self, firer, target):
+    def __init__(self, firer, target, damage=40):
         pygame.sprite.Sprite.__init__(self)
         self.firer = firer
         self.target = target
+        self.damage = damage
 
         print("bullet created")
         firer.earth.a_game.logger.update_log("bullet created")

@@ -16,6 +16,7 @@ class Ship(pygame.sprite.Sprite):
         self.orbital_angle = 0
         self.settings = ShipSettings()
         self.earth = earth
+        self.hp = 100
 
         self.location = [a_i - b_i for a_i, b_i in zip(earth.rect.center, [0, self.offset])]
         print(self.location)
@@ -58,9 +59,20 @@ class Ship(pygame.sprite.Sprite):
     
     def open_fire(self, hostile):
         if hostile != 0:
-            if len(self.bullets) < 3:
+            if len(self.bullets) < 1:
                 new_bullet = Bullet(self, hostile)
                 self.bullets.add(new_bullet)
                 self.earth.a_game.bullets.add(new_bullet)
+
+    def receive_damage(self, amount):
+        self.hp -= amount
+        if self.hp < 0:
+            self.delete_ship()
+    
+    def delete_ship(self):
+        self.kill()
+        del self
+
+
         
    
