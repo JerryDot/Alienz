@@ -17,11 +17,15 @@ class Alienz:
         self.settings = Settings()
         self.screen = pygame.display.set_mode( (self.settings.screen_width, self.settings.screen_height) )
         pygame.display.set_caption("Alienz")
-        self.earth = Earth(self)
         self.logger = Logger(self)
-        self.encounter = Encounter(self)
-        self.is_encounter_active = False
 
+        self.earth = Earth(self)
+        self.bullets = pygame.sprite.Group()
+        self.ships = pygame.sprite.Group()
+        self.enemies = pygame.sprite.Group()
+
+        self.is_encounter_active = False
+        self.encounter = Encounter(self)
 
     def run_game(self):
         # main loop for the game
@@ -30,6 +34,8 @@ class Alienz:
             self._update_screen()
             self._update_ships()
             self._update_enemies()
+            self._update_bullets()
+            self._check_collisions()
             self.clock.tick(60)
 
     def _check_events(self):
@@ -52,10 +58,10 @@ class Alienz:
             factory.blitme()
         for ship in self.earth.ships:
             ship.blitme()
-            for bullet in ship.bullets:
-                bullet.blitme()
         for enemy in self.encounter.enemies:
             enemy.blitme()
+        for bullet in self.bullets:
+            bullet.blitme()
         
         self.screen.blit(update_fps(self), (3,0))
         self.screen.blit(log_message(self, self.logger.log_message, self.logger.color), (800,0))
@@ -65,12 +71,17 @@ class Alienz:
     def _update_ships(self):
         for ship in self.earth.ships:
             ship.update_position()
-            for bullet in ship.bullets:
-                bullet.update_position()
 
     def _update_enemies(self):
         for enemy in self.encounter.enemies:
             enemy.update_position()
+
+    def _update_bullets(self):
+        for bullet in self.bullets:
+            bullet.update_position()
+
+    def _check_collisions(self):
+        collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, True, True)
 
 
 if __name__ == '__main__':

@@ -50,4 +50,6 @@ class Earth:
         self.possible_factory_locations.remove(factory_location)
     
     def create_ship(self):
-        self.ships.add(Ship(self))
+        new_ship = Ship(self)
+        self.ships.add(new_ship)
+        self.a_game.ships.add(new_ship)

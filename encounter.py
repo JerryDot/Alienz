@@ -10,7 +10,9 @@ class Encounter:
 
         if encounter_type == 'hostile':
             for i in range(3):
-                self.enemies.add(EnemyShip(self))
+                new_enemy = EnemyShip(self)
+                self.enemies.add(new_enemy)
+                self.a_game.enemies.add(new_enemy)
 
     def check_encounter(self):
         if not self.enemies.has():

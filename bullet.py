@@ -35,3 +35,9 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.x += 10*math.cos(math.radians(self.target_angle))
         self.rect.y += 10*math.sin(math.radians(self.target_angle))
         self.image = pygame.transform.rotate(self.master_image, self.target_angle)
+        if not self.target:
+            self.self_destruct()
+    
+    def self_destruct(self):
+        print('self destruct called')
+        del(self)

@@ -59,6 +59,8 @@ class Ship(pygame.sprite.Sprite):
     def open_fire(self, hostile):
         if hostile != 0:
             if len(self.bullets) < 3:
-                self.bullets.add(Bullet(self,hostile))
+                new_bullet = Bullet(self, hostile)
+                self.bullets.add(new_bullet)
+                self.earth.a_game.bullets.add(new_bullet)
         
    
