@@ -1,5 +1,5 @@
 import pygame
-from utilities import return_angle
+from utilities import return_angle, return_distance
 import math
 
 class Bullet(pygame.sprite.Sprite):
@@ -10,7 +10,6 @@ class Bullet(pygame.sprite.Sprite):
         self.target = target
         self.damage = damage
 
-        print("bullet created")
         firer.earth.a_game.logger.update_log("bullet created")
         self.screen = firer.earth.screen
         self.screen_rect = firer.earth.screen.get_rect()
@@ -31,14 +30,32 @@ class Bullet(pygame.sprite.Sprite):
     def blitme(self):
         self.screen.blit(self.image, self.rect)
 
+    def find_new_target(self):
+        print('finding new target')
+        if self.detect_nearest_hostile(200):
+            self.target = self.detect_nearest_hostile(200)
+        else:
+            print('no new target found')
+            self.destruct()
+
+    def detect_nearest_hostile(self, range):
+        distance = 10000
+        for enemy in self.firer.earth.a_game.encounter.enemies:
+            distance_to_enemy = return_distance(self, enemy)
+            if distance_to_enemy < distance:
+                distance = distance_to_enemy
+                nearest_hostile = enemy
+        if distance < range:
+            return nearest_hostile
+        else:
+            return 0
+
+
     def update_position(self):
         self.target_angle = return_angle(self, self.target)
-        self.rect.x += 10*math.cos(math.radians(self.target_angle))
-        self.rect.y += 10*math.sin(math.radians(self.target_angle))
+        self.rect.x += 5*math.cos(math.radians(self.target_angle))
+        self.rect.y += 5*math.sin(math.radians(self.target_angle))
         self.image = pygame.transform.rotate(self.master_image, self.target_angle)
-        if not self.target:
-            self.self_destruct()
     
-    def self_destruct(self):
-        print('self destruct called')
-        del(self)
+    def destruct(self):
+        self.kill()

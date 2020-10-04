@@ -10,7 +10,6 @@ class Ship(pygame.sprite.Sprite):
 
         pygame.sprite.Sprite.__init__(self)
 
-        print("ship created")
         earth.a_game.logger.update_log("ship created")
         self.offset = random.uniform(0.6,1)*200
         self.orbital_angle = 0
@@ -31,9 +30,6 @@ class Ship(pygame.sprite.Sprite):
 
         self.bullets = pygame.sprite.Group()
 
-        print(self.screen)
-        print(self.screen_rect)
-        print(self.rect)
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
@@ -63,6 +59,7 @@ class Ship(pygame.sprite.Sprite):
                 new_bullet = Bullet(self, hostile)
                 self.bullets.add(new_bullet)
                 self.earth.a_game.bullets.add(new_bullet)
+                hostile.targeting_bullets.add(new_bullet)
 
     def receive_damage(self, amount):
         self.hp -= amount

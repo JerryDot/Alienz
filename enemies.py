@@ -8,13 +8,13 @@ class EnemyShip(pygame.sprite.Sprite):
 
         pygame.sprite.Sprite.__init__(self)
         
-        print("enemy created")
         encounter.a_game.logger.update_log("enemy created")
         self.offset = random.uniform(-100,100)
         self.orbital_angle = 0
         self.settings = EnemyShipSettings()
         self.encounter = encounter
         self.hp = 100
+        self.targeting_bullets = pygame.sprite.Group()
 
         self.location = [0, 300 + self.offset]
         print(self.location)
@@ -56,7 +56,9 @@ class EnemyShip(pygame.sprite.Sprite):
     
     def delete_ship(self):
         self.kill()
-        del self
+        for bullet in self.targeting_bullets:
+            bullet.find_new_target()
+
 
         
         

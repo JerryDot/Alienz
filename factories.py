@@ -17,9 +17,6 @@ class Factory(pygame.sprite.Sprite):
         self.image = pygame.image.load('images/factory.bmp')
         self.rect = self.image.get_rect()
         self.rect.center = self.location
-        print(self.screen)
-        print(self.screen_rect)
-        print(self.rect)
     
     def blitme(self):
         self.screen.blit(self.image, self.rect)

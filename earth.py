@@ -33,9 +33,6 @@ class Earth:
         self.rect.center = self.screen_rect.center
         self.factories = pygame.sprite.Group()
         self.ships = pygame.sprite.Group()
-        print(self.screen)
-        print(self.screen_rect)
-        print(self.rect)
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
