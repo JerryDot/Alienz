@@ -95,9 +95,6 @@ class Alienz:
             #print(self.is_encounter_active)
 
 
-
-
-
 if __name__ == '__main__':
     a = Alienz()
     a.run_game()
